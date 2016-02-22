@@ -11,8 +11,10 @@ import java.util.TimerTask;
  */
 public class MyClockController {
 
-    private final int PERIOD = 2000;
     MyClockView view;
+
+    private final int PERIOD = 2000;
+
     Timer secondTimer = new Timer("second");
 
     Calendar calendar = new GregorianCalendar();

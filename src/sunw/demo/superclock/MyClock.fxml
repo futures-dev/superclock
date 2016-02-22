@@ -6,9 +6,9 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
-<fx:root xmlns:fx="http://javafx.com/fxml/1" fx:id="bind" maxHeight="-Infinity" maxWidth="-Infinity"
-         minHeight="-Infinity" minWidth="-Infinity" mouseTransparent="true" prefHeight="500.0" prefWidth="500.0"
-         type="javafx.scene.layout.Pane" xmlns="http://javafx.com/javafx/null">
+<fx:root fx:id="bind" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+         mouseTransparent="true" prefHeight="500.0" prefWidth="500.0" type="javafx.scene.layout.Pane"
+         xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <Circle fill="${bind.currentBackColor}" layoutX="250.0" layoutY="250.0" radius="200.0" stroke="BLACK"
                 strokeType="INSIDE" strokeWidth="5.0"/>
