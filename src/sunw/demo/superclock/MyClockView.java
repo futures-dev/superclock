@@ -1,10 +1,13 @@
 package sunw.demo.superclock;
 
+import javafx.application.Platform;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 
 import java.io.IOException;
@@ -14,6 +17,10 @@ import java.io.IOException;
  */
 
 public class MyClockView extends Pane {
+    @FXML
+    public TextField dayText;
+
+
     MyClockController controller = new MyClockController();
 
     public MyClockView() {
@@ -166,6 +173,10 @@ public class MyClockView extends Pane {
         _dayNumber.set(value);
     }
 
+    public void setDayNumber(int value) {
+        setDayNumber(String.format("%02d", value));
+    }
+
     //endregion
 
     //region Arrows
@@ -263,10 +274,18 @@ public class MyClockView extends Pane {
     //endregion
 
     public void setLine3(int second) {
+        setBackColor("#FFFF00");
         // second is [0;60)
         double angle = Math.toRadians(second * 6);
         setX1(getRadius_() * Math.sin(angle));
         setY1(-getRadius_() * Math.cos(angle));
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                updateBounds();
+                requestLayout();
+            }
+        });
     }
 
     //endregion

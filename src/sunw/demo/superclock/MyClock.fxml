@@ -7,7 +7,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 <fx:root fx:id="bind" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-         mouseTransparent="true" prefHeight="500.0" prefWidth="500.0" type="javafx.scene.layout.Pane"
+         prefHeight="500.0" prefWidth="500.0" type="javafx.scene.layout.Pane"
          xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <Circle fill="${bind.currentBackColor}" layoutX="250.0" layoutY="250.0" radius="200.0" stroke="BLACK"
@@ -15,9 +15,9 @@
         <Line endX="${bind.x1}" endY="${bind.y1}" layoutX="250.0" layoutY="250.0" stroke="WHITE" strokeWidth="5.0"/>
         <Line endX="${bind.x2}" endY="${bind.y2}" layoutX="250.0" layoutY="250.0" stroke="WHITE" strokeWidth="5.0"/>
         <Line endX="${bind.x3}" endY="${bind.y3}" layoutX="250.0" layoutY="250.0" stroke="WHITE" strokeWidth="5.0"/>
-        <TextField alignment="CENTER" editable="false" layoutX="213.0" layoutY="213.0" maxHeight="-Infinity"
+        <TextField fx:id="dayText" alignment="CENTER" layoutX="213.0" layoutY="213.0" maxHeight="-Infinity"
                    maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="75.0" prefWidth="75.0"
-                   text="${bind.dayNumber}">
+                   text="${bind.dayNumber}" editable="false">
             <padding>
                 <Insets bottom="0" left="0" right="0" top="0.0"/>
             </padding>
@@ -26,7 +26,8 @@
             </font>
         </TextField>
         <TextField alignment="CENTER" layoutX="100.0" layoutY="310.0" maxHeight="-Infinity" maxWidth="-Infinity"
-                   minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="300.0" text="${bind.city}">
+                   minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="300.0" text="${bind.city}"
+                   editable="false">
             <padding>
                 <Insets bottom="0" left="0" right="0" top="0.0"/>
             </padding>
@@ -35,7 +36,8 @@
             </font>
         </TextField>
         <TextField alignment="CENTER" layoutX="323.0" layoutY="233.0" maxHeight="-Infinity" maxWidth="-Infinity"
-                   minHeight="-Infinity" minWidth="-Infinity" prefHeight="30" prefWidth="40" text="${bind.AM_PM}">
+                   minHeight="-Infinity" minWidth="-Infinity" prefHeight="30" prefWidth="40" text="${bind.AM_PM}"
+                   editable="false">
             <padding>
                 <Insets bottom="0" left="0" right="0" top="0.0"/>
             </padding>

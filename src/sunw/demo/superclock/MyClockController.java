@@ -28,7 +28,7 @@ public class MyClockController {
                     view.setLine3(calendar.get(Calendar.SECOND));
                     view.setLine2(calendar.get(Calendar.MINUTE));
                     view.setLine1(3 * calendar.get(Calendar.HOUR) + calendar.get(Calendar.MINUTE) / 20);
-                    view.setDayNumber(String.format("%02d", calendar.get(Calendar.DAY_OF_MONTH)));
+                    view.setDayNumber(calendar.get(Calendar.DAY_OF_MONTH));
                     view.setAM_PM(calendar.get(Calendar.AM_PM));
                 }
             }
