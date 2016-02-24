@@ -18,6 +18,23 @@ public class MyClockBeanInfo extends SimpleBeanInfo {
         }
         return null;
     }
+
+    enum Property{
+        AM_PM
+    }
+
+    @Override
+    public PropertyDescriptor[] getPropertyDescriptors(){
+        PropertyDescriptor[] properties = new PropertyDescriptor[1];
+        try {
+
+            properties[Property.AM_PM.ordinal()] = new PropertyDescriptor("AM_PM", MyClock.class, "getAM_PM", "setAM_PM");
+            //properties[Property.AM_PM.ordinal()].setBound(true);
+        } catch (IntrospectionException e) {
+            e.printStackTrace();
+        }
+        return properties;
+    }
 }
 //
 //    public PropertyDescriptor[] getPropertyDescriptors() {

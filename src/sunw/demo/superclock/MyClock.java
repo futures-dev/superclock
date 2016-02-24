@@ -43,6 +43,19 @@ public class MyClock extends JFXPanel {
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         System.out.println(frame);
+    }
 
+    public String getBackColorPM(){
+        return root.myClockViewController.getBackColorPM();
+    }
+    public void setBackColorPM(String val){
+        root.myClockViewController.setBackColorPM(val);
+    }
+
+    public String getBackColorAM(){
+        return root.myClockViewController.getBackColorAM();
+    }
+    public void setBackColorAM(String val){
+        root.myClockViewController.setBackColorAM(val);
     }
 }
