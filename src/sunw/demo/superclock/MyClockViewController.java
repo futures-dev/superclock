@@ -1,6 +1,11 @@
 package sunw.demo.superclock;
 
 
+import javafx.application.Platform;
+import javafx.fxml.FXML;
+import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
+
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Timer;
@@ -9,7 +14,7 @@ import java.util.TimerTask;
 /**
  * Created by Andrei on 22.02.2016.
  */
-public class MyClockController {
+public class MyClockViewController {
 
     MyClockView view;
 
@@ -19,7 +24,7 @@ public class MyClockController {
 
     Calendar calendar = new GregorianCalendar();
 
-    public MyClockController() {
+    public MyClockViewController() {
         secondTimer.schedule(new TimerTask() {
             @Override
             public void run() {
@@ -42,4 +47,9 @@ public class MyClockController {
     public void setTimeZone(String timeZone) {
 
     }
+
+    public void mouseEntered(MouseEvent e){
+        System.out.println("mouse");
+    }
+
 }

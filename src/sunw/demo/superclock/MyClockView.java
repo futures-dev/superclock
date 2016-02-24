@@ -17,104 +17,105 @@ import java.io.IOException;
  */
 
 public class MyClockView extends Pane {
+
     @FXML
-    public TextField dayText;
+    private MyClockViewController myClockViewController;
 
-
-    MyClockController controller = new MyClockController();
+    @FXML
+    private TextField dayText;
 
     public MyClockView() {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(
                 "MyClock.fxml"));
         fxmlLoader.getNamespace().put("bind", this);
         fxmlLoader.setRoot(this);
-        fxmlLoader.setController(this);
+        //fxmlLoader.setController(myClockViewController);
         try {
             fxmlLoader.load();
         } catch (IOException exception) {
             //throw new RuntimeException(exception);
         }
-        controller.setView(this);
+        dayNumberProperty.setValue("33");
         InitializeComponents();
     }
 
     //region width
     public static final Double DEFAULT_WIDTH = 500.0;
-    private DoubleProperty _width = new SimpleDoubleProperty(DEFAULT_WIDTH);
+    private DoubleProperty widthProperty = new SimpleDoubleProperty(DEFAULT_WIDTH);
 
     public final double getWidth_() {
-        return _width.get();
+        return widthProperty.get();
     }
 
     public final void setWidth_(Double value) {
-        _width.set(value);
+        widthProperty.set(value);
     }
     //endregion
 
     //region height
     public static final Double DEFAULT_HEIGHT = 500.0;
-    private DoubleProperty _height = new SimpleDoubleProperty(DEFAULT_HEIGHT);
+    private DoubleProperty heightProperty = new SimpleDoubleProperty(DEFAULT_HEIGHT);
 
     public final double getHeight_() {
-        return _height.get();
+        return heightProperty.get();
     }
 
     public final void setHeight_(Double value) {
-        _height.set(value);
+        heightProperty.set(value);
     }
     //endregion
 
     //region radius
     public static final Double DEFAULT_RADIUS = 200.0;
-    private DoubleProperty _radius = new SimpleDoubleProperty(DEFAULT_RADIUS);
+    private DoubleProperty radiusProperty = new SimpleDoubleProperty(DEFAULT_RADIUS);
 
     public final double getRadius_() {
-        return _radius.get();
+        return radiusProperty.get();
     }
 
     public final void setRadius_(Double value) {
-        _radius.set(value);
+        radiusProperty.set(value);
     }
     //endregion
 
     //region backColor
 
     //region backColorPM
-    public static final String DEFAULT_BACKCOLORPM = "#FFFF00";
-    private StringProperty _backColorPM = new SimpleStringProperty(DEFAULT_BACKCOLORPM);
+    public static final String DEFAULT_BACK_COLOR_PM = "#FFFF00";
+    private StringProperty backColorPMProperty = new SimpleStringProperty(DEFAULT_BACK_COLOR_PM);
 
     public final String getBackColorPM() {
-        return _backColorPM.get();
+        return backColorPMProperty.get();
     }
 
     public final void setBackColorPM(String value) {
-        _backColorPM.set(value);
+        backColorPMProperty.set(value);
     }
     //endregion
 
     //region backColorAM
-    public static final String DEFAULT_BACKCOLORAM = "#0000FF";
-    private StringProperty _backColorAM = new SimpleStringProperty(DEFAULT_BACKCOLORAM);
+    public static final String DEFAULT_BACK_COLOR_AM = "#0000FF";
+    private StringProperty backColorAMProperty = new SimpleStringProperty(DEFAULT_BACK_COLOR_AM);
 
     public final String getBackColorAM() {
-        return _backColorAM.get();
+        return backColorAMProperty.get();
     }
 
-    public final void setBackColor(String value) {
-        _backColorAM.set(value);
+    public final void setBackColorAM(String value) {
+        backColorAMProperty.set(value);
     }
     //endregion
 
     //region currentBackColor
-    public static final String DEFAULT_CURRENTBACKCOLOR = DEFAULT_BACKCOLORAM;
-    private StringProperty _currentBackColor = new SimpleStringProperty(DEFAULT_CURRENTBACKCOLOR);
+    public static final String DEFAULT_CURRENTBACKCOLOR = DEFAULT_BACK_COLOR_AM;
+    private StringProperty currentBackColorProperty = new SimpleStringProperty(DEFAULT_CURRENTBACKCOLOR);
 
     public final String getCurrentBackColor() {
-        return _currentBackColor.get();
+        return currentBackColorProperty.get();
     }
 
     public final void setCurrentBackColor(String value) {
-        _currentBackColor.set(value);
+        currentBackColorProperty.set(value);
     }
     //endregion
 
@@ -123,18 +124,18 @@ public class MyClockView extends Pane {
     //region AM_PM
 
     public static final String DEFAULT_AM_PM = "AM";
-    private StringProperty _AM_PM = new SimpleStringProperty(DEFAULT_AM_PM);
+    private StringProperty AM_PMProperty = new SimpleStringProperty(DEFAULT_AM_PM);
 
     public final String getAM_PM() {
-        return _AM_PM.get();
+        return AM_PMProperty.get();
     }
 
     public final void setAM_PM(String value) {
-        _AM_PM.set(value);
+        AM_PMProperty.set(value);
         if (value.equals("AM")) {
-            _currentBackColor.set(_backColorAM.get());
+            currentBackColorProperty.set(backColorAMProperty.get());
         } else {
-            _currentBackColor.set(_backColorPM.get());
+            currentBackColorProperty.set(backColorPMProperty.get());
         }
     }
 
@@ -148,14 +149,14 @@ public class MyClockView extends Pane {
     //region city
 
     public static final String DEFAULT_city = "Moscow (UTC+03:00)";
-    private StringProperty _city = new SimpleStringProperty(DEFAULT_city);
+    private StringProperty cityProperty = new SimpleStringProperty(DEFAULT_city);
 
     public final String getCity() {
-        return _city.get();
+        return cityProperty.get();
     }
 
     public final void setCity(String value) {
-        _city.set(value);
+        cityProperty.set(value);
     }
 
     //endregion
@@ -163,14 +164,19 @@ public class MyClockView extends Pane {
     //region dayNumber
 
     public static final String DEFAULT_dayNumber = "01";
-    private StringProperty _dayNumber = new SimpleStringProperty(DEFAULT_dayNumber);
+    public StringProperty dayNumberProperty = new SimpleStringProperty(DEFAULT_dayNumber);
 
     public final String getDayNumber() {
-        return _dayNumber.get();
+        return dayNumberProperty.get();
     }
 
     public final void setDayNumber(String value) {
-        _dayNumber.set(value);
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                dayNumberProperty.set(value);
+            }
+        });
     }
 
     public void setDayNumber(int value) {
@@ -183,27 +189,27 @@ public class MyClockView extends Pane {
 
     //region x1
     public static final Double DEFAULT_x1 = .0;
-    private DoubleProperty _x1 = new SimpleDoubleProperty(DEFAULT_x1);
+    private DoubleProperty x1Property = new SimpleDoubleProperty(DEFAULT_x1);
 
     public final Double getX1() {
-        return _x1.get();
+        return x1Property.get();
     }
 
     public final void setX1(Double value) {
-        _x1.set(value);
+        x1Property.set(value);
     }
     //endregion
 
     //region y1
     public static final Double DEFAULT_y1 = -200.0;
-    private DoubleProperty _y1 = new SimpleDoubleProperty(DEFAULT_y1);
+    private DoubleProperty y1Property = new SimpleDoubleProperty(DEFAULT_y1);
 
     public final Double getY1() {
-        return _y1.get();
+        return y1Property.get();
     }
 
     public final void setY1(Double value) {
-        _y1.set(value);
+        y1Property.set(value);
     }
     //endregion
 
@@ -216,27 +222,27 @@ public class MyClockView extends Pane {
 
     //region x2
     public static final Double DEFAULT_x2 = 150.0;
-    private DoubleProperty _x2 = new SimpleDoubleProperty(DEFAULT_x2);
+    private DoubleProperty x2Property = new SimpleDoubleProperty(DEFAULT_x2);
 
     public final Double getX2() {
-        return _x2.get();
+        return x2Property.get();
     }
 
     public final void setX2(Double value) {
-        _x2.set(value);
+        x2Property.set(value);
     }
     //endregion
 
     //region y2
     public static final Double DEFAULT_y2 = 0.0;
-    private DoubleProperty _y2 = new SimpleDoubleProperty(DEFAULT_y2);
+    private DoubleProperty y2Property = new SimpleDoubleProperty(DEFAULT_y2);
 
     public final Double getY2() {
-        return _y2.get();
+        return y2Property.get();
     }
 
     public final void setY2(Double value) {
-        _y2.set(value);
+        y2Property.set(value);
     }
     //endregion
 
@@ -249,32 +255,32 @@ public class MyClockView extends Pane {
 
     //region x3
     public static final Double DEFAULT_x3 = -100.0;
-    private DoubleProperty _x3 = new SimpleDoubleProperty(DEFAULT_x3);
+    private DoubleProperty x3Property = new SimpleDoubleProperty(DEFAULT_x3);
 
     public final Double getX3() {
-        return _x3.get();
+        return x3Property.get();
     }
 
     public final void setX3(Double value) {
-        _x3.set(value);
+        x3Property.set(value);
     }
     //endregion
 
     //region y3
     public static final Double DEFAULT_y3 = .0;
-    private DoubleProperty _y3 = new SimpleDoubleProperty(DEFAULT_y3);
+    private DoubleProperty y3Property = new SimpleDoubleProperty(DEFAULT_y3);
 
     public final Double getY3() {
-        return _y3.get();
+        return y3Property.get();
     }
 
     public final void setY3(Double value) {
-        _y3.set(value);
+        y3Property.set(value);
     }
     //endregion
 
     public void setLine3(int second) {
-        setBackColor("#FFFF00");
+        setCurrentBackColor("#FFFF00");
         // second is [0;60)
         double angle = Math.toRadians(second * 6);
         setX1(getRadius_() * Math.sin(angle));
@@ -292,6 +298,5 @@ public class MyClockView extends Pane {
 
 
     private void InitializeComponents() {
-
     }
 }
