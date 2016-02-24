@@ -7,13 +7,13 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<fx:root  fx:id="bind" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#mouseEntered" prefHeight="500.0" prefWidth="500.0" type="javafx.scene.layout.Pane" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseEntered="#mouseEntered" prefHeight="500.0" prefWidth="500.0" type="javafx.scene.layout.Pane" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <Circle fill="${bind.currentBackColor}" layoutX="250.0" layoutY="250.0" radius="200.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="5.0" />
-        <Line endX="${bind.x1}" endY="${bind.y1}" layoutX="250.0" layoutY="250.0" stroke="WHITE" strokeWidth="5.0" />
-        <Line endX="${bind.x2}" endY="${bind.y2}" layoutX="250.0" layoutY="250.0" stroke="WHITE" strokeWidth="5.0" />
-        <Line endX="${bind.x3}" endY="${bind.y3}" layoutX="250.0" layoutY="250.0" stroke="WHITE" strokeWidth="5.0" />
-        <TextField fx:id="dayText" alignment="CENTER" editable="false" layoutX="213.0" layoutY="213.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="75.0" prefWidth="75.0" text="${bind.dayNumber}">
+        <Circle fill="##00FF00" layoutX="250.0" layoutY="250.0" radius="200.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="5.0" />
+        <Line endX="0" endY="-200" layoutX="250.0" layoutY="250.0" stroke="WHITE" strokeWidth="5.0" />
+        <Line endX="150" endY="0" layoutX="250.0" layoutY="250.0" stroke="WHITE" strokeWidth="5.0" />
+        <Line endX="-100" endY="0" layoutX="250.0" layoutY="250.0" stroke="WHITE" strokeWidth="5.0" />
+        <TextField fx:id="dayText" alignment="CENTER" editable="false" layoutX="213.0" layoutY="213.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="75.0" prefWidth="75.0" text="31">
             <padding>
                 <Insets bottom="0" left="0" right="0" top="0.0" />
             </padding>
@@ -21,7 +21,7 @@
                 <Font name="Bauhaus 93" size="60.0" />
             </font>
         </TextField>
-        <TextField alignment="CENTER" editable="false" layoutX="100.0" layoutY="310.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="300.0" text="${bind.city}">
+        <TextField alignment="CENTER" editable="false" layoutX="100.0" layoutY="310.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="300.0" text="Moscow">
             <padding>
                 <Insets bottom="0" left="0" right="0" top="0.0" />
             </padding>
@@ -29,7 +29,7 @@
                 <Font name="Bauhaus 93" size="18.0" />
             </font>
         </TextField>
-        <TextField alignment="CENTER" editable="false" layoutX="323.0" layoutY="233.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30" prefWidth="40" text="${bind.AM_PM}">
+        <TextField alignment="CENTER" editable="false" layoutX="323.0" layoutY="233.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30" prefWidth="40" text="AM">
             <padding>
                 <Insets bottom="0" left="0" right="0" top="0.0" />
             </padding>

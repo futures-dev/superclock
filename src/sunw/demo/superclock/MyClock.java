@@ -33,7 +33,6 @@ public class MyClock extends JFXPanel {
 
     public void paint(Graphics g) {
         super.paint(g);
-        root.setDayNumber(39);
         root.requestLayout();
     }
 
