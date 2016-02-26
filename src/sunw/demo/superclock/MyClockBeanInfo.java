@@ -42,17 +42,7 @@ public class MyClockBeanInfo extends SimpleBeanInfo {
             properties[Property.backColorPM.ordinal()] = new PropertyDescriptor("Background color PM", MyClock.class, "getBackColorPM", "setBackColorPM");
             properties[Property.foreColorAM.ordinal()] = new PropertyDescriptor("Foreground color AM", MyClock.class, "getForeColorAM", "setForeColorAM");
             properties[Property.foreColorPM.ordinal()] = new PropertyDescriptor("Foreground color PM", MyClock.class, "getForeColorPM", "setForeColorPM");
-                /*
-                properties[Property.AM_PM.ordinal()] = new PropertyDescriptor("AM_PM", MyClock.class, "getAM_PM", "setAM_PM");
-                properties[Property.AM_PM.ordinal()] = new PropertyDescriptor("AM_PM", MyClock.class, "getAM_PM", "setAM_PM");
-                properties[Property.AM_PM.ordinal()] = new PropertyDescriptor("AM_PM", MyClock.class, "getAM_PM", "setAM_PM");
-                properties[Property.AM_PM.ordinal()] = new PropertyDescriptor("AM_PM", MyClock.class, "getAM_PM", "setAM_PM");
-                properties[Property.AM_PM.ordinal()] = new PropertyDescriptor("AM_PM", MyClock.class, "getAM_PM", "setAM_PM");
-                properties[Property.AM_PM.ordinal()] = new PropertyDescriptor("AM_PM", MyClock.class, "getAM_PM", "setAM_PM");
-                properties[Property.AM_PM.ordinal()] = new PropertyDescriptor("AM_PM", MyClock.class, "getAM_PM", "setAM_PM");
-                properties[Property.AM_PM.ordinal()] = new PropertyDescriptor("AM_PM", MyClock.class, "getAM_PM", "setAM_PM");
-    */
-            //properties[Property.AM_PM.ordinal()].setBound(true);
+
         } catch (IntrospectionException e) {
             e.printStackTrace();
         }

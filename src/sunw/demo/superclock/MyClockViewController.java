@@ -51,7 +51,7 @@ public class MyClockViewController implements Initializable {
 
     //endregion
 
-    MyClockView view;
+    private MyClockView view;
 
     //region consts
 
@@ -59,10 +59,10 @@ public class MyClockViewController implements Initializable {
 
     //endregion
 
-    Calendar calendar;
-    boolean ticking = true;
-    long delay = 0;
-    long stopTime = 0;
+    private Calendar calendar;
+    private boolean ticking = true;
+    private long delay = 0;
+    private long stopTime = 0;
 
     @FXML
     public void initialize(URL location, ResourceBundle resources) {
@@ -107,7 +107,7 @@ public class MyClockViewController implements Initializable {
 
     //region width
     public static final Double DEFAULT_WIDTH_ = 500.0;
-    private DoubleProperty _width_ = new SimpleDoubleProperty(DEFAULT_WIDTH_);
+    DoubleProperty _width_ = new SimpleDoubleProperty(DEFAULT_WIDTH_);
 
     public final double getWidth_() {
         return _width_.get();
@@ -120,7 +120,7 @@ public class MyClockViewController implements Initializable {
 
     //region height
     public static final Double DEFAULT_HEIGHT_ = 500.0;
-    private DoubleProperty _height_ = new SimpleDoubleProperty(DEFAULT_HEIGHT_);
+    DoubleProperty _height_ = new SimpleDoubleProperty(DEFAULT_HEIGHT_);
 
     public final double getHeight_() {
         return _height_.get();
@@ -133,7 +133,7 @@ public class MyClockViewController implements Initializable {
 
     //region radius
     public static final Double DEFAULT_RADIUS = 200.0;
-    private DoubleProperty _radius = new SimpleDoubleProperty(DEFAULT_RADIUS);
+    DoubleProperty _radius = new SimpleDoubleProperty(DEFAULT_RADIUS);
 
     public final double getRadius_() {
         return _radius.get();
@@ -148,7 +148,7 @@ public class MyClockViewController implements Initializable {
 
     //region backColorPM
     public static final Color DEFAULT_BACK_COLOR_PM = Color.valueOf("#1f4037");
-    private Property<Color> _backColorPM = new SimpleObjectProperty<>(DEFAULT_BACK_COLOR_PM);
+    Property<Color> _backColorPM = new SimpleObjectProperty<>(DEFAULT_BACK_COLOR_PM);
 
     public final Color getBackColorPM() {
         return _backColorPM.getValue();
@@ -161,7 +161,7 @@ public class MyClockViewController implements Initializable {
 
     //region backColorAM
     public static final Color DEFAULT_BACK_COLOR_AM = Color.valueOf("#79553d");
-    private Property<Color> _backColorAM = new SimpleObjectProperty<>(DEFAULT_BACK_COLOR_AM);
+    Property<Color> _backColorAM = new SimpleObjectProperty<>(DEFAULT_BACK_COLOR_AM);
 
     public final Color getBackColorAM() {
         return _backColorAM.getValue();
@@ -174,7 +174,7 @@ public class MyClockViewController implements Initializable {
 
     //region currentBackColor
     public static final Color DEFAULT_CURRENTBACKCOLOR = DEFAULT_BACK_COLOR_AM;
-    private Property<Color> _currentBackColor = new SimpleObjectProperty<>(DEFAULT_CURRENTBACKCOLOR);
+    Property<Color> _currentBackColor = new SimpleObjectProperty<>(DEFAULT_CURRENTBACKCOLOR);
 
     public final Color getCurrentBackColor() {
         return _currentBackColor.getValue();
@@ -191,7 +191,7 @@ public class MyClockViewController implements Initializable {
 
     //region foreColorPM
     public static final Color DEFAULT_FORE_COLOR_PM = Color.valueOf("#cf919c");
-    private Property<Color> _foreColorPM = new SimpleObjectProperty<>(DEFAULT_FORE_COLOR_PM);
+    Property<Color> _foreColorPM = new SimpleObjectProperty<>(DEFAULT_FORE_COLOR_PM);
 
     public final Color getForeColorPM() {
         return _foreColorPM.getValue();
@@ -204,7 +204,7 @@ public class MyClockViewController implements Initializable {
 
     //region foreColorAM
     public static final Color DEFAULT_FORE_COLOR_AM = Color.valueOf("#ad4c5e");
-    private Property<Color> _foreColorAM = new SimpleObjectProperty<>(DEFAULT_FORE_COLOR_AM);
+    Property<Color> _foreColorAM = new SimpleObjectProperty<>(DEFAULT_FORE_COLOR_AM);
 
     public final Color getForeColorAM() {
         return _foreColorAM.getValue();
@@ -217,7 +217,7 @@ public class MyClockViewController implements Initializable {
 
     //region currentForeColor
     public static final Color DEFAULT_CURRENTFORECOLOR = DEFAULT_FORE_COLOR_AM;
-    private Property<Color> _currentForeColor = new SimpleObjectProperty<>(DEFAULT_CURRENTFORECOLOR);
+    Property<Color> _currentForeColor = new SimpleObjectProperty<>(DEFAULT_CURRENTFORECOLOR);
 
     public final Color getCurrentForeColor() {
         return _currentForeColor.getValue();
@@ -234,7 +234,7 @@ public class MyClockViewController implements Initializable {
     //region AM_PM
 
     public static final String DEFAULT_AM_PM = "AM";
-    private StringProperty _AM_PM = new SimpleStringProperty(DEFAULT_AM_PM);
+    StringProperty _AM_PM = new SimpleStringProperty(DEFAULT_AM_PM);
 
     public final String getAM_PM() {
         return _AM_PM.get();
@@ -273,7 +273,7 @@ public class MyClockViewController implements Initializable {
     //region city
 
     public static final String DEFAULT_city = TimeZoneManager.DEFAULT_TIMEZONE_STRING;
-    private StringProperty _city = new SimpleStringProperty(DEFAULT_city);
+    StringProperty _city = new SimpleStringProperty(DEFAULT_city);
 
     public final String getCity() {
         return _city.get();
@@ -326,7 +326,7 @@ public class MyClockViewController implements Initializable {
 
     //region x1
     public static final Double DEFAULT_x1 = .0;
-    private DoubleProperty _x1 = new SimpleDoubleProperty(DEFAULT_x1);
+    DoubleProperty _x1 = new SimpleDoubleProperty(DEFAULT_x1);
 
     public final Double getX1() {
         return _x1.get();
@@ -339,7 +339,7 @@ public class MyClockViewController implements Initializable {
 
     //region y1
     public static final Double DEFAULT_y1 = -200.0;
-    private DoubleProperty _y1 = new SimpleDoubleProperty(DEFAULT_y1);
+    DoubleProperty _y1 = new SimpleDoubleProperty(DEFAULT_y1);
 
     public final Double getY1() {
         return _y1.get();
@@ -359,7 +359,7 @@ public class MyClockViewController implements Initializable {
 
     //region x2
     public static final Double DEFAULT_x2 = 150.0;
-    private DoubleProperty _x2 = new SimpleDoubleProperty(DEFAULT_x2);
+    DoubleProperty _x2 = new SimpleDoubleProperty(DEFAULT_x2);
 
     public final Double getX2() {
         return _x2.get();
@@ -372,7 +372,7 @@ public class MyClockViewController implements Initializable {
 
     //region y2
     public static final Double DEFAULT_y2 = 0.0;
-    private DoubleProperty _y2 = new SimpleDoubleProperty(DEFAULT_y2);
+    DoubleProperty _y2 = new SimpleDoubleProperty(DEFAULT_y2);
 
     public final Double getY2() {
         return _y2.get();
@@ -392,7 +392,7 @@ public class MyClockViewController implements Initializable {
 
     //region x3
     public static final Double DEFAULT_x3 = -100.0;
-    private DoubleProperty _x3 = new SimpleDoubleProperty(DEFAULT_x3);
+    DoubleProperty _x3 = new SimpleDoubleProperty(DEFAULT_x3);
 
     public final Double getX3() {
         return _x3.get();
@@ -405,7 +405,7 @@ public class MyClockViewController implements Initializable {
 
     //region y3
     public static final Double DEFAULT_y3 = .0;
-    private DoubleProperty _y3 = new SimpleDoubleProperty(DEFAULT_y3);
+    DoubleProperty _y3 = new SimpleDoubleProperty(DEFAULT_y3);
 
     public final Double getY3() {
         return _y3.get();

@@ -2,8 +2,11 @@ package sunw.demo.superclock;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Line;
+import javafx.scene.text.Font;
+import javafx.scene.text.TextAlignment;
 
 import java.io.IOException;
 
@@ -32,9 +35,10 @@ public class MyClockView extends Pane {
     }
 
     private void InitializeComponents() {
+        double r = myClockViewController.getRadius_();
+
         // small lines
 
-        double r = myClockViewController.getRadius_();
         for (int i = 0; i < 60; i++) {
             double angle = Math.toRadians(i * 6);
             double endX = r * Math.sin(angle) / 1.05;
@@ -44,6 +48,19 @@ public class MyClockView extends Pane {
             line.setLayoutX(250);
             line.setLayoutY(250);
             getChildren().add(line);
+        }
+
+        // numbers
+
+        for (int i = 0; i < 12; i++) {
+            double angle = Math.toRadians(i * 30);
+            Label label = new Label(Integer.toString(i));
+            label.setFont(new Font("Bauhaus 93", 25.0));
+            label.setTextAlignment(TextAlignment.CENTER);
+            label.setLayoutX(243 + r * Math.sin(angle) / 1.27);
+            label.setLayoutY(235 - r * Math.cos(angle) / 1.27);
+            label.textFillProperty().bind(myClockViewController._currentForeColor);
+            getChildren().add(label);
         }
     }
 
