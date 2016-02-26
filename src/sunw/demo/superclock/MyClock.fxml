@@ -6,16 +6,15 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
-<fx:root fx:id="myClockView" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-         prefHeight="500.0" prefWidth="500.0" type="javafx.scene.layout.Pane" xmlns="http://javafx.com/javafx/null"
-         xmlns:fx="http://javafx.com/fxml/1">
+<fx:root fx:id="myClockView" maxHeight="Infinity" maxWidth="Infinity" minHeight="300" minWidth="300" prefHeight="500.0"
+         prefWidth="500.0" style="-fx-border-color: black; -fx-border-width: 5;" type="javafx.scene.layout.Pane"
+         xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <Circle fx:id="circle" fill="#FFFFFF" layoutX="250.0" layoutY="250.0" radius="200.0" stroke="BLACK"
+        <Circle fx:id="circle" fill="#FFFFFF" layoutX="250.0" layoutY="250.0" radius="200" stroke="BLACK"
                 strokeType="INSIDE" strokeWidth="5.0"/>
         <TextField fx:id="dayNumberTextField" accessibleRole="TEXT" alignment="CENTER" editable="false"
-                   focusTraversable="false" layoutX="213.0" layoutY="213.0" maxHeight="-Infinity" maxWidth="-Infinity"
-                   minHeight="-Infinity" minWidth="-Infinity" mouseTransparent="true" prefHeight="75.0" prefWidth="75.0"
-                   text="31">
+                   focusTraversable="false" layoutX="213.0" layoutY="213.0" mouseTransparent="true" prefHeight="75.0"
+                   prefWidth="75.0" text="31">
             <padding>
                 <Insets bottom="0" left="0" right="0" top="0.0" />
             </padding>
@@ -24,8 +23,7 @@
             </font>
         </TextField>
         <TextField fx:id="cityTextField" accessibleRole="TEXT" alignment="CENTER" editable="false"
-                   focusTraversable="false" layoutX="133.0" layoutY="310.0" maxHeight="-Infinity" maxWidth="-Infinity"
-                   minHeight="-Infinity" minWidth="-Infinity" mouseTransparent="true" prefHeight="30.0"
+                   focusTraversable="false" layoutX="133.0" layoutY="310.0" mouseTransparent="true" prefHeight="30.0"
                    prefWidth="235.0" text="Moscow">
             <padding>
                 <Insets bottom="0" left="0" right="0" top="0.0" />
@@ -35,9 +33,8 @@
             </font>
         </TextField>
         <TextField fx:id="AM_PMTextField" accessibleRole="TEXT" alignment="CENTER" editable="false"
-                   focusTraversable="false" layoutX="323.0" layoutY="233.0" maxHeight="-Infinity" maxWidth="-Infinity"
-                   minHeight="-Infinity" minWidth="-Infinity" mouseTransparent="true" prefHeight="30" prefWidth="40"
-                   text="AM">
+                   focusTraversable="false" layoutX="323.0" layoutY="233.0" mouseTransparent="true" prefHeight="30"
+                   prefWidth="40" text="AM">
             <padding>
                 <Insets bottom="0" left="0" right="0" top="0.0" />
             </padding>

@@ -6,6 +6,7 @@ import javafx.beans.property.*;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
@@ -48,6 +49,9 @@ public class MyClockViewController implements Initializable {
 
     @FXML
     private Circle circle;
+
+    @FXML
+    private Pane myClockView;
 
     //endregion
 

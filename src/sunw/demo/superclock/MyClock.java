@@ -13,8 +13,7 @@ public class MyClock extends JFXPanel {
 
     public MyClock() {
         root = new MyClockView();
-        BorderLayout layout = new BorderLayout();
-        setLayout(layout);
+        ;
         setScene(new Scene(root));
         setVisible(true);
     }

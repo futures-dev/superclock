@@ -64,5 +64,4 @@ public class MyClockView extends Pane {
         }
     }
 
-
 }
