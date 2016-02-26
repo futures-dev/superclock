@@ -2,24 +2,29 @@ package sunw.demo.superclock;
 
 
 import javafx.application.Platform;
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import javafx.beans.property.*;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 
-import javax.xml.soap.Text;
 import java.net.URL;
-import java.util.*;
+import java.sql.Time;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.ResourceBundle;
+import java.util.TimeZone;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by Andrei on 22.02.2016.
  */
-public class MyClockViewController implements Initializable{
+public class MyClockViewController implements Initializable {
 
     //region FXML
 
@@ -41,6 +46,9 @@ public class MyClockViewController implements Initializable{
     @FXML
     private Line line3;
 
+    @FXML
+    private Circle circle;
+
     //endregion
 
     MyClockView view;
@@ -51,11 +59,12 @@ public class MyClockViewController implements Initializable{
 
     //endregion
 
-    Timer secondTimer;
-
     Calendar calendar;
+    boolean ticking = true;
+    long delay = 0;
+    long stopTime = 0;
 
-    @Override
+    @FXML
     public void initialize(URL location, ResourceBundle resources) {
 
         // bindings
@@ -69,61 +78,56 @@ public class MyClockViewController implements Initializable{
         line2.endYProperty().bind(_y2);
         line3.endXProperty().bind(_x3);
         line3.endYProperty().bind(_y3);
+        circle.strokeProperty().bind(_currentForeColor);
+        circle.fillProperty().bind(_currentBackColor);
 
         // timers
-        secondTimer = new Timer("second");
         calendar = new GregorianCalendar();
-        secondTimer.schedule(new TimerTask() {
+        ScheduledExecutorService timer = Executors.newSingleThreadScheduledExecutor();
+        ScheduledFuture<?> future = timer.scheduleAtFixedRate(new Runnable() {
             @Override
             public void run() {
-                calendar.setTimeInMillis(System.currentTimeMillis());
-                setLine3(calendar.get(Calendar.SECOND));
-                setLine2(calendar.get(Calendar.MINUTE));
-                setLine1(3 * calendar.get(Calendar.HOUR) + calendar.get(Calendar.MINUTE) / 20);
-                setDayNumber(calendar.get(Calendar.DAY_OF_MONTH));
-                setAM_PM(calendar.get(Calendar.AM_PM));
+                if (ticking) {
+                    calendar.setTimeInMillis(System.currentTimeMillis() - delay);
+                    setLine3(calendar.get(Calendar.SECOND));
+                    setLine2(calendar.get(Calendar.MINUTE));
+                    setLine1(3 * calendar.get(Calendar.HOUR) + calendar.get(Calendar.MINUTE) / 20);
+                    setDayNumber(calendar.get(Calendar.DAY_OF_MONTH));
+                    setAM_PM(calendar.get(Calendar.AM_PM));
+                }
             }
-        }, 0, PERIOD);
+        }, 0, PERIOD, TimeUnit.MILLISECONDS);
     }
+
     public MyClockViewController(MyClockView view) {
         this.view = view;
-        System.out.println("con");
     }
-
-    public void setTimeZone(String timeZone) {
-
-    }
-
-    public void mouseEntered(MouseEvent e){
-        System.out.println("mouse");
-    }
-
 
     //region properties
 
     //region width
-    public static final Double DEFAULT_WIDTH = 500.0;
-    private DoubleProperty _width = new SimpleDoubleProperty(DEFAULT_WIDTH);
+    public static final Double DEFAULT_WIDTH_ = 500.0;
+    private DoubleProperty _width_ = new SimpleDoubleProperty(DEFAULT_WIDTH_);
 
     public final double getWidth_() {
-        return _width.get();
+        return _width_.get();
     }
 
     public final void setWidth_(Double value) {
-        _width.set(value);
+        _width_.set(value);
     }
     //endregion
 
     //region height
-    public static final Double DEFAULT_HEIGHT = 500.0;
-    private DoubleProperty _height = new SimpleDoubleProperty(DEFAULT_HEIGHT);
+    public static final Double DEFAULT_HEIGHT_ = 500.0;
+    private DoubleProperty _height_ = new SimpleDoubleProperty(DEFAULT_HEIGHT_);
 
     public final double getHeight_() {
-        return _height.get();
+        return _height_.get();
     }
 
     public final void setHeight_(Double value) {
-        _height.set(value);
+        _height_.set(value);
     }
     //endregion
 
@@ -143,45 +147,89 @@ public class MyClockViewController implements Initializable{
     //region backColor
 
     //region backColorPM
-    public static final String DEFAULT_BACK_COLOR_PM = "#FFFF00";
-    private StringProperty _backColorPM = new SimpleStringProperty(DEFAULT_BACK_COLOR_PM);
+    public static final Color DEFAULT_BACK_COLOR_PM = Color.valueOf("#1f4037");
+    private Property<Color> _backColorPM = new SimpleObjectProperty<>(DEFAULT_BACK_COLOR_PM);
 
-    public final String getBackColorPM() {
-        return _backColorPM.get();
+    public final Color getBackColorPM() {
+        return _backColorPM.getValue();
     }
 
-    public final void setBackColorPM(String value) {
-        _backColorPM.set(value);
+    public final void setBackColorPM(Color value) {
+        _backColorPM.setValue(value);
     }
     //endregion
 
     //region backColorAM
-    public static final String DEFAULT_BACK_COLOR_AM = "#0000FF";
-    private StringProperty _backColorAM = new SimpleStringProperty(DEFAULT_BACK_COLOR_AM);
+    public static final Color DEFAULT_BACK_COLOR_AM = Color.valueOf("#79553d");
+    private Property<Color> _backColorAM = new SimpleObjectProperty<>(DEFAULT_BACK_COLOR_AM);
 
-    public final String getBackColorAM() {
-        return _backColorAM.get();
+    public final Color getBackColorAM() {
+        return _backColorAM.getValue();
     }
 
-    public final void setBackColorAM(String value) {
-        _backColorAM.set(value);
+    public final void setBackColorAM(Color value) {
+        _backColorAM.setValue(value);
     }
     //endregion
 
     //region currentBackColor
-    public static final String DEFAULT_CURRENTBACKCOLOR = DEFAULT_BACK_COLOR_AM;
-    private StringProperty _currentBackColorAM = new SimpleStringProperty(DEFAULT_CURRENTBACKCOLOR);
+    public static final Color DEFAULT_CURRENTBACKCOLOR = DEFAULT_BACK_COLOR_AM;
+    private Property<Color> _currentBackColor = new SimpleObjectProperty<>(DEFAULT_CURRENTBACKCOLOR);
 
-    public final String getCurrentBackColor() {
-        return _currentBackColorAM.get();
+    public final Color getCurrentBackColor() {
+        return _currentBackColor.getValue();
     }
 
-    public final void setCurrentBackColor(String value) {
-        _currentBackColorAM.set(value);
+    public final void setCurrentBackColor(Color value) {
+        _currentBackColor.setValue(value);
     }
     //endregion
 
     //endregion
+
+    //region foreColor
+
+    //region foreColorPM
+    public static final Color DEFAULT_FORE_COLOR_PM = Color.valueOf("#cf919c");
+    private Property<Color> _foreColorPM = new SimpleObjectProperty<>(DEFAULT_FORE_COLOR_PM);
+
+    public final Color getForeColorPM() {
+        return _foreColorPM.getValue();
+    }
+
+    public final void setForeColorPM(Color value) {
+        _foreColorPM.setValue(value);
+    }
+    //endregion
+
+    //region foreColorAM
+    public static final Color DEFAULT_FORE_COLOR_AM = Color.valueOf("#ad4c5e");
+    private Property<Color> _foreColorAM = new SimpleObjectProperty<>(DEFAULT_FORE_COLOR_AM);
+
+    public final Color getForeColorAM() {
+        return _foreColorAM.getValue();
+    }
+
+    public final void setForeColorAM(Color value) {
+        _foreColorAM.setValue(value);
+    }
+    //endregion
+
+    //region currentForeColor
+    public static final Color DEFAULT_CURRENTFORECOLOR = DEFAULT_FORE_COLOR_AM;
+    private Property<Color> _currentForeColor = new SimpleObjectProperty<>(DEFAULT_CURRENTFORECOLOR);
+
+    public final Color getCurrentForeColor() {
+        return _currentForeColor.getValue();
+    }
+
+    public final void setCurrentForeColor(Color value) {
+        _currentForeColor.setValue(value);
+    }
+    //endregion
+
+    //endregion
+
 
     //region AM_PM
 
@@ -195,9 +243,11 @@ public class MyClockViewController implements Initializable{
     public final void setAM_PM(String value) {
         _AM_PM.set(value);
         if (value.equals("AM")) {
-            _currentBackColorAM.set(_backColorAM.get());
+            _currentBackColor.setValue(_backColorAM.getValue());
+            _currentForeColor.setValue(_foreColorAM.getValue());
         } else {
-            _currentBackColorAM.set(_backColorPM.get());
+            _currentBackColor.setValue(_backColorPM.getValue());
+            _currentForeColor.setValue(_foreColorPM.getValue());
         }
     }
 
@@ -207,10 +257,22 @@ public class MyClockViewController implements Initializable{
 
     //endregion
 
+    //region currentTime
+
+    public void setCurrentTime(String val) {
+        try {
+
+            delay = System.currentTimeMillis() - Time.valueOf(val).getTime();
+        } catch (Exception e) {
+            // bad input format}
+        }
+    }
+
+    //endregion
 
     //region city
 
-    public static final String DEFAULT_city = "Moscow (UTC+03:00)";
+    public static final String DEFAULT_city = TimeZoneManager.DEFAULT_TIMEZONE_STRING;
     private StringProperty _city = new SimpleStringProperty(DEFAULT_city);
 
     public final String getCity() {
@@ -247,6 +309,19 @@ public class MyClockViewController implements Initializable{
 
     //endregion
 
+    //region timeZone
+
+    public TimeZone getTimeZone() {
+        return calendar.getTimeZone();
+    }
+
+    public void setTimeZone(TimeZone timeZone) {
+        calendar.setTimeZone(timeZone);
+        setCity(TimeZoneManager.TimeZoneToStringConvert(timeZone));
+    }
+
+    //endregion
+
     //region Arrows
 
     //region x1
@@ -278,8 +353,8 @@ public class MyClockViewController implements Initializable{
     public void setLine1(int hour) {
         // hour is [0;36)
         double angle = Math.toRadians(hour * 10);
-        setX1(getRadius_() * Math.sin(angle));
-        setY1(-getRadius_() * Math.cos(angle));
+        setX1(getRadius_() * Math.sin(angle) / 1.8);
+        setY1(-getRadius_() * Math.cos(angle) / 1.8);
     }
 
     //region x2
@@ -311,8 +386,8 @@ public class MyClockViewController implements Initializable{
     public void setLine2(int minute) {
         // minute is [0;60)
         double angle = Math.toRadians(minute * 6);
-        setX2(getRadius_() * Math.sin(angle));
-        setY2(-getRadius_() * Math.cos(angle));
+        setX2(getRadius_() * Math.sin(angle) / 1.4);
+        setY2(-getRadius_() * Math.cos(angle) / 1.4);
     }
 
     //region x3
@@ -342,13 +417,27 @@ public class MyClockViewController implements Initializable{
     //endregion
 
     public void setLine3(int second) {
-        setCurrentBackColor("#FFFF00");
         // second is [0;60)
         double angle = Math.toRadians(second * 6);
-        setX3(getRadius_() * Math.sin(angle));
-        setY3(-getRadius_() * Math.cos(angle));
+        setX3(getRadius_() * Math.sin(angle) / 1.1);
+        setY3(-getRadius_() * Math.cos(angle) / 1.1);
     }
 
     //endregion
     //endregion
+
+    public void setStopped(boolean s) {
+        if (s == ticking) {
+            if (s) {
+                stopTime = System.currentTimeMillis();
+            } else {
+                delay += System.currentTimeMillis() - stopTime;
+            }
+            ticking = !s;
+        }
+    }
+
+    public boolean isStopped() {
+        return !ticking;
+    }
 }

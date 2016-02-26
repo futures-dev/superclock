@@ -1,34 +1,57 @@
+package sunw.demo.superclock;
+
+import java.beans.BeanInfo;
+import java.beans.IntrospectionException;
+import java.beans.PropertyDescriptor;
+import java.beans.SimpleBeanInfo;
 
 /**
- * The only thing we define in the Juggler BeanInfo is a GIF icon.
+ * Created by Computer on 26.02.2016.
  */
-
-package sunw.demo.superclock;
-// package sunw.demo
-
-import java.beans.*;
-import java.beans.PropertyDescriptor;
-
 public class MyClockBeanInfo extends SimpleBeanInfo {
 
     public java.awt.Image getIcon(int iconKind) {
         if (iconKind == BeanInfo.ICON_COLOR_16x16) {
-            java.awt.Image img = loadImage("JugglerIcon.gif");
+            java.awt.Image img = loadImage("icon.gif");
             return img;
         }
         return null;
     }
 
-    enum Property{
-        AM_PM
+    enum Property {
+        foreColorPM,
+        foreColorAM,
+        backColorPM,
+        backColorAM,
+        currentTime,
+        stopped,
+        timeZone
     }
 
-    @Override
-    public PropertyDescriptor[] getPropertyDescriptors(){
-        PropertyDescriptor[] properties = new PropertyDescriptor[1];
-        try {
 
-            properties[Property.AM_PM.ordinal()] = new PropertyDescriptor("AM_PM", MyClock.class, "getAM_PM", "setAM_PM");
+    @Override
+    public PropertyDescriptor[] getPropertyDescriptors() {
+        PropertyDescriptor[] properties = new PropertyDescriptor[Property.values().length];
+        try {
+            properties[Property.timeZone.ordinal()] = new PropertyDescriptor("Time Zone", MyClock.class, "getTimeZone", "setTimeZone");
+            properties[Property.timeZone.ordinal()].setPropertyEditorClass(TimeZonePropertyEditor.class);
+            properties[Property.timeZone.ordinal()].setBound(true);
+            properties[Property.stopped.ordinal()] = new PropertyDescriptor("Stop", MyClock.class, "isStopped", "setStopped");
+            properties[Property.currentTime.ordinal()] = new PropertyDescriptor("Set Time", MyClock.class, "getCurrentTime", "setCurrentTime");
+            properties[Property.backColorAM.ordinal()] = new PropertyDescriptor("Background color AM", MyClock.class, "getBackColorAM", "setBackColorAM");
+            properties[Property.backColorPM.ordinal()] = new PropertyDescriptor("Background color PM", MyClock.class, "getBackColorPM", "setBackColorPM");
+            properties[Property.foreColorAM.ordinal()] = new PropertyDescriptor("Foreground color AM", MyClock.class, "getForeColorAM", "setForeColorAM");
+            properties[Property.foreColorPM.ordinal()] = new PropertyDescriptor("Foreground color PM", MyClock.class, "getForeColorPM", "setForeColorPM");
+                /*
+                properties[Property.AM_PM.ordinal()] = new PropertyDescriptor("AM_PM", MyClock.class, "getAM_PM", "setAM_PM");
+                properties[Property.AM_PM.ordinal()] = new PropertyDescriptor("AM_PM", MyClock.class, "getAM_PM", "setAM_PM");
+                properties[Property.AM_PM.ordinal()] = new PropertyDescriptor("AM_PM", MyClock.class, "getAM_PM", "setAM_PM");
+                properties[Property.AM_PM.ordinal()] = new PropertyDescriptor("AM_PM", MyClock.class, "getAM_PM", "setAM_PM");
+                properties[Property.AM_PM.ordinal()] = new PropertyDescriptor("AM_PM", MyClock.class, "getAM_PM", "setAM_PM");
+                properties[Property.AM_PM.ordinal()] = new PropertyDescriptor("AM_PM", MyClock.class, "getAM_PM", "setAM_PM");
+                properties[Property.AM_PM.ordinal()] = new PropertyDescriptor("AM_PM", MyClock.class, "getAM_PM", "setAM_PM");
+                properties[Property.AM_PM.ordinal()] = new PropertyDescriptor("AM_PM", MyClock.class, "getAM_PM", "setAM_PM");
+    */
             //properties[Property.AM_PM.ordinal()].setBound(true);
         } catch (IntrospectionException e) {
             e.printStackTrace();
@@ -36,36 +59,4 @@ public class MyClockBeanInfo extends SimpleBeanInfo {
         return properties;
     }
 }
-//
-//    public PropertyDescriptor[] getPropertyDescriptors() {
-//        try {
-//
-//            PropertyDescriptor debug =
-//                    new PropertyDescriptor("debug", beanClass);
-//
-//            PropertyDescriptor animationRate =
-//                    new PropertyDescriptor("animationRate", beanClass);
-//
-//            PropertyDescriptor name =
-//                    new PropertyDescriptor("name", beanClass);
-//
-//            debug.setBound(true);
-//            animationRate.setBound(true);
-//            name.setBound(true);
-//
-//            PropertyDescriptor rv[] = {debug, animationRate, name};
-//
-//            //PropertyDescriptor rv[] = {};
-//            return rv;
-//        } catch( IntrospectionException e) {
-//            throw new Error(e.toString());
-//        }
-//    }
-//
-//    public int getDefaultPropertyIndex() {
-//        // the index for the animationRate property.
-//        return 1;
-//    }
-//
-//    private final static Class beanClass = MyClock.class;
-//}
+

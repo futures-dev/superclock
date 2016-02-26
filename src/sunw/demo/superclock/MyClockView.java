@@ -1,13 +1,7 @@
 package sunw.demo.superclock;
 
-import javafx.application.Platform;
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Line;
 
@@ -37,15 +31,21 @@ public class MyClockView extends Pane {
         InitializeComponents();
     }
 
-
-
-
-
     private void InitializeComponents() {
-        System.out.println("initView");
+        // small lines
 
+        double r = myClockViewController.getRadius_();
+        for (int i = 0; i < 60; i++) {
+            double angle = Math.toRadians(i * 6);
+            double endX = r * Math.sin(angle) / 1.05;
+            double endY = -r * Math.cos(angle) / 1.05;
+            double lenCoef = i % 5 == 0 ? 1.1 : 1.05;
+            Line line = new Line(endX / lenCoef, endY / lenCoef, endX, endY);
+            line.setLayoutX(250);
+            line.setLayoutY(250);
+            getChildren().add(line);
+        }
     }
-
 
 
 }
