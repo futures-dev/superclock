@@ -1,4 +1,4 @@
 Manifest-Version: 1.0
-Name: sunw/demo/superclock/MyClock.class
+Name: ru/hse/edu/aikolomiets/superclock/MyClock.class
 Java-Bean: True
 Created-By: 1.2.2 (Sun Microsystems Inc.)

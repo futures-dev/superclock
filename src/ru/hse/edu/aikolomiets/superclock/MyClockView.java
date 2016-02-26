@@ -1,4 +1,8 @@
-package sunw.demo.superclock;
+/**
+ * Created by Andrei Koomiets on 26.02.2016
+ */
+
+package ru.hse.edu.aikolomiets.superclock;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,15 +15,23 @@ import javafx.scene.text.TextAlignment;
 import java.io.IOException;
 
 /**
- * Created by Andrei on 22.02.2016.
+ * View of MyClock JavaFX custom control.
+ * <p>
+ * MyClockView is a Pane containing shapes and text controls. Controller of type {@link MyClockViewController}
+ * is created via FXMLLoader, and most of the layout is defined in MyClock.fxml.
  */
 
 public class MyClockView extends Pane {
 
-
+    /**
+     * Reference to the controller
+     */
     @FXML
     MyClockViewController myClockViewController;
 
+    /**
+     * Control constructor. Loads the view using FXMLLoader and runs initialization.
+     */
     public MyClockView() {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(
                 "MyClock.fxml"));
@@ -34,8 +46,11 @@ public class MyClockView extends Pane {
         InitializeComponents();
     }
 
+    /**
+     * Draws layout components that cannot be drawn in fxml.
+     */
     private void InitializeComponents() {
-        double r = myClockViewController.getRadius_();
+        double r = myClockViewController.getRadius_(); // clock radius
 
         // small lines
 
@@ -52,7 +67,7 @@ public class MyClockView extends Pane {
 
         // numbers
 
-        for (int i = 0; i < 12; i++) {
+        for (int i = 1; i < 13; i++) {
             double angle = Math.toRadians(i * 30);
             Label label = new Label(Integer.toString(i));
             label.setFont(new Font("Bauhaus 93", 25.0));

@@ -1,10 +1,14 @@
-package sunw.demo.superclock;
+/**
+ * Created by Andrei Koomiets on 26.02.2016
+ */
+
+package ru.hse.edu.aikolomiets.superclock;
 
 import java.util.HashMap;
 import java.util.TimeZone;
 
 /**
- * Created by Computer on 26.02.2016.
+ * Created by Andrei Kolomiets on 26.02.2016.
  */
 public class TimeZoneManager {
     public static final HashMap<String, TimeZone> TIME_ZONES = new HashMap<String, TimeZone>() {{

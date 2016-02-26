@@ -1,9 +1,13 @@
-package sunw.demo.superclock;
+/**
+ * Created by Andrei Koomiets on 26.02.2016
+ */
+
+package ru.hse.edu.aikolomiets.superclock;
 
 import java.beans.PropertyEditorSupport;
 
 /**
- * Created by Computer on 26.02.2016.
+ * Created by Andrei Kolomiets on 26.02.2016.
  */
 public class TimeZonePropertyEditor extends PropertyEditorSupport {
     @Override

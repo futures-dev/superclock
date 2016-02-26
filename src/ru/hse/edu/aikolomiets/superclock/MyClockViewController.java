@@ -1,7 +1,10 @@
-package sunw.demo.superclock;
+/**
+ * Created by Andrei Koomiets on 26.02.2016
+ */
+
+package ru.hse.edu.aikolomiets.superclock;
 
 
-import javafx.application.Platform;
 import javafx.beans.property.*;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -12,21 +15,20 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 
 import java.net.URL;
-import java.sql.Time;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.ResourceBundle;
 import java.util.TimeZone;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Created by Andrei on 22.02.2016.
+ * MyClock JavaFX component controller
  */
 public class MyClockViewController implements Initializable {
 
+    // GUI references
     //region FXML
 
     @FXML
@@ -55,19 +57,44 @@ public class MyClockViewController implements Initializable {
 
     //endregion
 
+    // view reference
     private MyClockView view;
 
     //region consts
 
-    private final int PERIOD = 500;
+    /**
+     * Time update frequency
+     */
+    private final int PERIOD = 250;
 
     //endregion
 
+    /**
+     * Controls time shown on clock
+     */
     private Calendar calendar;
+
+    /**
+     * Is false if clock is stopped
+     */
     private boolean ticking = true;
+
+    /**
+     * Delay between clock and real time
+     */
     private long delay = 0;
+
+    /**
+     * Time when the clock time changed last time
+     */
     private long stopTime = 0;
 
+    /**
+     * Initializes the controller: sets bindings and activates timers
+     *
+     * @param location  {@inheritDoc}
+     * @param resources {@inheritDoc}
+     */
     @FXML
     public void initialize(URL location, ResourceBundle resources) {
 
@@ -88,7 +115,7 @@ public class MyClockViewController implements Initializable {
         // timers
         calendar = new GregorianCalendar();
         ScheduledExecutorService timer = Executors.newSingleThreadScheduledExecutor();
-        ScheduledFuture<?> future = timer.scheduleAtFixedRate(new Runnable() {
+        timer.scheduleAtFixedRate(new Runnable() {
             @Override
             public void run() {
                 if (ticking) {
@@ -103,10 +130,16 @@ public class MyClockViewController implements Initializable {
         }, 0, PERIOD, TimeUnit.MILLISECONDS);
     }
 
+    /**
+     * Constructs the controller setting reference to its view. Note that controller must be initialized before using.
+     *
+     * @param view view to control
+     */
     public MyClockViewController(MyClockView view) {
         this.view = view;
     }
 
+    // all the ui-related properties used by MyClock
     //region properties
 
     //region width
@@ -164,7 +197,7 @@ public class MyClockViewController implements Initializable {
     //endregion
 
     //region backColorAM
-    public static final Color DEFAULT_BACK_COLOR_AM = Color.valueOf("#79553d");
+    public static final Color DEFAULT_BACK_COLOR_AM = Color.valueOf("#004953");
     Property<Color> _backColorAM = new SimpleObjectProperty<>(DEFAULT_BACK_COLOR_AM);
 
     public final Color getBackColorAM() {
@@ -207,7 +240,7 @@ public class MyClockViewController implements Initializable {
     //endregion
 
     //region foreColorAM
-    public static final Color DEFAULT_FORE_COLOR_AM = Color.valueOf("#ad4c5e");
+    public static final Color DEFAULT_FORE_COLOR_AM = Color.valueOf("#aaaaaa");
     Property<Color> _foreColorAM = new SimpleObjectProperty<>(DEFAULT_FORE_COLOR_AM);
 
     public final Color getForeColorAM() {
@@ -265,8 +298,12 @@ public class MyClockViewController implements Initializable {
 
     public void setCurrentTime(String val) {
         try {
-
-            delay = System.currentTimeMillis() - Time.valueOf(val).getTime();
+            String[] sp = val.split(":");
+            GregorianCalendar cal = new GregorianCalendar(calendar.getTimeZone());
+            cal.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DATE),
+                    Integer.parseInt(sp[0]), Integer.parseInt(sp[1]), Integer.parseInt(sp[2]));
+            stopTime = cal.getTimeInMillis();
+            delay = System.currentTimeMillis() - stopTime;
         } catch (Exception e) {
             // bad input format}
         }
@@ -299,12 +336,7 @@ public class MyClockViewController implements Initializable {
     }
 
     public final void setDayNumber(String value) {
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                _dayNumber.set(value);
-            }
-        });
+        _dayNumber.set(value);
     }
 
     public void setDayNumber(int value) {
@@ -430,18 +462,33 @@ public class MyClockViewController implements Initializable {
     //endregion
     //endregion
 
+    //region stopped
+
+    /**
+     * Stops or resumes MyClock. The clock resumes at the time it was stopped.
+     *
+     * @param s true for stop, false for resume
+     */
     public void setStopped(boolean s) {
+        // if nothing to be changed, skip
         if (s == ticking) {
             if (s) {
+                // stop
                 stopTime = System.currentTimeMillis();
             } else {
+                // resume: update delay
                 delay += System.currentTimeMillis() - stopTime;
             }
             ticking = !s;
         }
     }
 
+    /**
+     * @return value indicating whether the clock is stopped
+     */
     public boolean isStopped() {
         return !ticking;
     }
+
+    //endregion
 }

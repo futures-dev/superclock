@@ -1,28 +1,43 @@
-package sunw.demo.superclock;
-// package sunw.demo
+/**
+ * Created by Andrei Koomiets on 26.02.2016
+ */
+
+package ru.hse.edu.aikolomiets.superclock;
 
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.Scene;
 import javafx.scene.paint.Color;
 
 import javax.swing.*;
-import java.awt.*;
 
+/**
+ * Swing-compatible java bean presenting a clock.
+ */
 public class MyClock extends JFXPanel {
-    MyClockView root;
+    /**
+     * Time Zone names to be used as tags in beanbox.
+     */
+    public static final String[] TIME_ZONE_NAMES_ARRAY = TimeZoneManager.TIME_ZONES.keySet().toArray(new String[TimeZoneManager.TIME_ZONES.size()]);
 
+    /**
+     * JavaFX component to be presented
+     */
+    private MyClockView root;
+
+    /**
+     * Constructs an instance of MyClock component
+     */
     public MyClock() {
         root = new MyClockView();
-        ;
         setScene(new Scene(root));
         setVisible(true);
     }
 
-    public void paint(Graphics g) {
-        super.paint(g);
-        root.requestLayout();
-    }
-
+    /**
+     * Entry point for debugging stand-alone
+     *
+     * @param args Command-line arguments
+     */
     public static void main(String[] args) {
         JFrame frame = new JFrame("Swing and JavaFX");
         frame.add(new MyClock());
@@ -31,14 +46,18 @@ public class MyClock extends JFXPanel {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
+    /**
+     * Converts Color object to HEX representation
+     * @param color Color to convert
+     * @return String of format "#%02x%02x%02x"
+     */
     public static String ColorToHexConvert(Color color) {
         return String.format("#%02x%02x%02x", (int) (color.getRed() * 255),
                 (int) (color.getGreen() * 255),
                 (int) (color.getBlue() * 255));
     }
 
-    public static final String[] TIME_ZONE_NAMES_ARRAY = TimeZoneManager.TIME_ZONES.keySet().toArray(new String[TimeZoneManager.TIME_ZONES.size()]);
-
+    //region bean Properties
 
     public String getBackColorPM() {
         return ColorToHexConvert(root.myClockViewController.getBackColorPM());
@@ -95,4 +114,6 @@ public class MyClock extends JFXPanel {
     public void setCurrentTime(String val) {
         root.myClockViewController.setCurrentTime(val);
     }
+
+    //endregion
 }
