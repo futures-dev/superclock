@@ -1,5 +1,5 @@
 /**
- * Created by Andrei Koomiets on 26.02.2016
+ * Created by Andrei Kolomiets on 26.02.2016
  */
 
 package ru.hse.edu.aikolomiets.superclock;

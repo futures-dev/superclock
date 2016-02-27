@@ -1,5 +1,5 @@
 /**
- * Created by Andrei Koomiets on 26.02.2016
+ * Created by Andrei Kolomiets on 26.02.2016
  */
 
 package ru.hse.edu.aikolomiets.superclock;
@@ -48,6 +48,7 @@ public class MyClock extends JFXPanel {
 
     /**
      * Converts Color object to HEX representation
+     *
      * @param color Color to convert
      * @return String of format "#%02x%02x%02x"
      */

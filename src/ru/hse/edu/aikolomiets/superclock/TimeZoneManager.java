@@ -1,5 +1,5 @@
 /**
- * Created by Andrei Koomiets on 26.02.2016
+ * Created by Andrei Kolomiets on 26.02.2016
  */
 
 package ru.hse.edu.aikolomiets.superclock;
@@ -8,9 +8,13 @@ import java.util.HashMap;
 import java.util.TimeZone;
 
 /**
- * Created by Andrei Kolomiets on 26.02.2016.
+ * Auxiliary class for supplying info about Time Zones
  */
 public class TimeZoneManager {
+
+    /**
+     * Maps string representations to corresponding TimeZone objects
+     */
     public static final HashMap<String, TimeZone> TIME_ZONES = new HashMap<String, TimeZone>() {{
         put("Baker Island (GMT-12:00)", TimeZone.getTimeZone("GMT-12"));
         put("Midway Islands (GMT-11:00)", TimeZone.getTimeZone("GMT-11"));
@@ -43,6 +47,12 @@ public class TimeZoneManager {
     public static final String DEFAULT_TIMEZONE_STRING = "Moscow (GMT+03:00)";
     public static final TimeZone DEFAULT_TIMEZONE = TimeZoneManager.TIME_ZONES.get(DEFAULT_TIMEZONE_STRING);
 
+    /**
+     * Converts a TimeZone instance to its String representation
+     *
+     * @param timeZone TimeZone to convert
+     * @return String representation from TIME_ZONES
+     */
     public static String TimeZoneToStringConvert(TimeZone timeZone) {
         final String[] found = new String[]{DEFAULT_TIMEZONE_STRING};
         TimeZoneManager.TIME_ZONES.entrySet().forEach(stringTimeZoneEntry -> {
@@ -53,6 +63,12 @@ public class TimeZoneManager {
         return found[0];
     }
 
+    /**
+     * Returns TimeZone given its String representation
+     *
+     * @param val String representation to convert
+     * @return Corresponding TimeZone object
+     */
     public static TimeZone StringToTimeZoneConvert(String val) {
 
         return TimeZoneManager.TIME_ZONES.getOrDefault(val, DEFAULT_TIMEZONE);
