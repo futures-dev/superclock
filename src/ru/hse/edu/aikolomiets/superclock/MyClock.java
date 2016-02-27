@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.paint.Color;
 
 import javax.swing.*;
+import java.awt.*;
 
 /**
  * Swing-compatible java bean presenting a clock.
@@ -31,6 +32,9 @@ public class MyClock extends JFXPanel {
         root = new MyClockView();
         setScene(new Scene(root));
         setVisible(true);
+        Dimension dim = new Dimension((int) root.getWidth(), (int) root.getHeight());
+        setMinimumSize(dim);
+        setMaximumSize(dim);
     }
 
     /**
